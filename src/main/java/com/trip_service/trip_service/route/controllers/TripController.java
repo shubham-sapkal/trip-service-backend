@@ -41,7 +41,7 @@ public class TripController {
     @PostMapping("/all")
     public SendResponse<List<Trip>> getAllTrips() {
         try {
-            return new SendResponse<>(200, "Data Retrived Successfully!!", tripService.getAllTrips());
+            return new SendResponse<>(200, "Data Retrieved Successfully!!", tripService.getAllTrips());
         }
         catch (Exception e) {
             return new SendResponse<>(500, e.getMessage(), null);

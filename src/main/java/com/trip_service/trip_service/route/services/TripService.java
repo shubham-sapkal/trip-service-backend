@@ -63,7 +63,7 @@ public class TripService {
 
         Trip createdTrip = new Trip();
 
-        // Retrived Created By
+        // Retrieved Created By
         Optional<Users> optionalCreatedBy = userRepository.findById(newTrip.getCreatedBy());
 
         if ( optionalCreatedBy.isEmpty() ) {
@@ -72,7 +72,7 @@ public class TripService {
 
         createdTrip.setCreatedBy(optionalCreatedBy.get() );
 
-        // Retrived Vehicle Information
+        // Retrieved Vehicle Information
         Optional<VehicleDetails> optionalVehicleDetails = vehicleDetailsRepository.findById(newTrip.getVehicleDetails());
 
         if(optionalVehicleDetails.isEmpty()) {
@@ -82,7 +82,7 @@ public class TripService {
         createdTrip.setVehicleDetails(optionalVehicleDetails.get());
 
 
-        // Retrived Trip Information
+        // Retrieved Trip Information
         Optional<Route> optionalTripRoute = routeRepository.findById(newTrip.getTripRoute());
 
         if (optionalTripRoute.isEmpty()) {
@@ -92,7 +92,7 @@ public class TripService {
 
         createdTrip.setTripRoute(optionalTripRoute.get());
 
-        // Retrived Driver Information
+        // Retrieved Driver Information
         Optional<Users> optionalDriver = userRepository.findById(newTrip.getDriver());
 
         if(optionalDriver.isEmpty()) {

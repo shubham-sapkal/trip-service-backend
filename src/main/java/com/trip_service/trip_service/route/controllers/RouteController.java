@@ -35,7 +35,7 @@ public class RouteController {
     // API View to get All Route
     @PostMapping("/all")
     public SendResponse<List<Route>> getAllRoutes() {
-        return new SendResponse<>(200, "Data Retrived Successfully!", tripService.getAllRoutes());
+        return new SendResponse<>(200, "Data Retrieved Successfully!", tripService.getAllRoutes());
     }
 
 }
