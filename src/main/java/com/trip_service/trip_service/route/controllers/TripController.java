@@ -1,6 +1,7 @@
 package com.trip_service.trip_service.route.controllers;
 
 import com.trip_service.trip_service.route.DTO.RequestBodyDTO;
+import com.trip_service.trip_service.route.DTO.ResponseBodyDTO;
 import com.trip_service.trip_service.route.models.Trip;
 import com.trip_service.trip_service.route.services.TripService;
 import com.trip_service.trip_service.utils.DTO.SendResponse;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/trip")
@@ -27,9 +29,7 @@ public class TripController {
     public SendResponse<Trip> createTrip(@RequestBody RequestBodyDTO.TripCreationRequestBody newTrip ) {
 
         try {
-
             return new SendResponse<>(200, "Trip Created Successfully!", tripService.createTrip(newTrip));
-
         }
         catch (Exception e) {
             return new SendResponse<>(500, e.getMessage(), null);
@@ -39,7 +39,7 @@ public class TripController {
 
     // API View to get all trips
     @PostMapping("/all")
-    public SendResponse<List<Trip>> getAllTrips() {
+    public SendResponse<List<ResponseBodyDTO.TripDetailsResponse>> getAllTrips() {
         try {
             return new SendResponse<>(200, "Data Retrieved Successfully!!", tripService.getAllTrips());
         }
@@ -48,5 +48,16 @@ public class TripController {
         }
     }
 
+    @PostMapping("/trip-details/{tripId}")
+    public SendResponse<ResponseBodyDTO.TripDetailsResponse> getTripById(@PathVariable UUID tripId ) {
+
+        try {
+            return new SendResponse<>(200, "Trip Found Successfully!", tripService.getTripById(tripId));
+        }
+        catch (Exception e) {
+            return new SendResponse<>(500, e.getMessage(), null);
+        }
+
+    }
 
 }

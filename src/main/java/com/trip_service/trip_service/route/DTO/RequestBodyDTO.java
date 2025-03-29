@@ -27,4 +27,5 @@ public class RequestBodyDTO {
         private String tripEndDate;
         private Boolean isReturnTrip;
     }
+
 }
