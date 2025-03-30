@@ -38,7 +38,7 @@ public class TripController {
     }
 
     // API View to get all trips
-    @PostMapping("/all")
+    @GetMapping("/all")
     public SendResponse<List<ResponseBodyDTO.TripDetailsResponse>> getAllTrips() {
         try {
             return new SendResponse<>(200, "Data Retrieved Successfully!!", tripService.getAllTrips());
