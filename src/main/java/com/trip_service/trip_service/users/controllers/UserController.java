@@ -83,6 +83,7 @@ public class UserController {
     }
 
     @PostMapping("/manipulate-user-role")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public SendResponse<List<String>> manipulateRole( @RequestBody RequestBodyDTO.RoleRequestBody requestBody ) {
 
         try {
@@ -93,12 +94,16 @@ public class UserController {
             return new SendResponse<>(
                     200,
                     "Role Manipulated Successfully!!",
+                    "",
                     userServices.manipulateRole( requestBody.getChangeType(), requestBody.getUsername(), requestBody.getRole())
             );
 
         }
+        catch (GeneratedApiException apiException){
+            return new SendResponse<>(apiException.getStatusCode(), apiException.getMessage(), apiException.getErrorMsg(), null);
+        }
         catch (Exception e) {
-            return new SendResponse<>(500, e.getMessage(), null);
+            return new SendResponse<>(500, "Internal Server Error!!", e.getMessage(), null);
         }
 
     }
