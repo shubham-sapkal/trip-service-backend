@@ -11,9 +11,9 @@
 
 ## API Reference
 
-USERS API - [LINK TO USERS API DOCS]
+USERS API - [[ LINK TO USERS API DOCS ]](https://github.com/shubham-sapkal/trip-service-backend/tree/master/src/main/java/com/trip_service/trip_service/users)
 
-ROUTES API - [LINK TO ROUTES API DOCS]
+ROUTES API - [[ LINK TO ROUTES API DOCS ]](https://github.com/shubham-sapkal/trip-service-backend/tree/master/src/main/java/com/trip_service/trip_service/route)
 
 
 ## Run Locally
