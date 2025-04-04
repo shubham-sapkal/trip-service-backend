@@ -1,7 +1,5 @@
 package com.trip_service.trip_service.users.DTO;
 
-import lombok.Getter;
-import lombok.Setter;
 
 public class RequestBodyDTO {
 

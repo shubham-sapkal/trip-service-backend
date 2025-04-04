@@ -37,8 +37,6 @@ public class Route {
     // Method to add Stops
     public void addStops(List<StopLocations> stops ) {
         routeStops.addAll(stops);
-
-        System.out.print("Route Stops: " + stops);
     }
 
     // Method to delete routes

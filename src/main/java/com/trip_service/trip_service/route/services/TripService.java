@@ -10,6 +10,7 @@ import com.trip_service.trip_service.route.repositories.TripRepository;
 import com.trip_service.trip_service.route.repositories.VehicleDetailsRepository;
 import com.trip_service.trip_service.users.models.Users;
 import com.trip_service.trip_service.users.repositories.UserRepository;
+import com.trip_service.trip_service.utils.exceptions.GeneratedApiException;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,9 +50,8 @@ public class TripService {
         Optional<Route> foundRoute = findRoute(route.getRouteName());
 
         if (foundRoute.isPresent()) {
-            throw new RuntimeException("Route Exists!!");
+            throw new GeneratedApiException(204, "Route Exists!!");
         }
-
 
         return routeRepository.save( route );
 
@@ -71,7 +71,7 @@ public class TripService {
         Optional<Users> optionalCreatedBy = userRepository.findById(newTrip.getCreatedBy());
 
         if ( optionalCreatedBy.isEmpty() ) {
-            throw new RuntimeException("User Not Found");
+            throw new GeneratedApiException(404, "User Not Found");
         }
 
         createdTrip.setCreatedBy(optionalCreatedBy.get() );
@@ -80,7 +80,7 @@ public class TripService {
         Optional<VehicleDetails> optionalVehicleDetails = vehicleDetailsRepository.findById(newTrip.getVehicleDetails());
 
         if(optionalVehicleDetails.isEmpty()) {
-            throw new RuntimeException("Vehicle Details Not Found!!");
+            throw new GeneratedApiException(404, "Vehicle Details Not Found!!");
         }
 
         createdTrip.setVehicleDetails(optionalVehicleDetails.get());
@@ -90,7 +90,7 @@ public class TripService {
         Optional<Route> optionalTripRoute = routeRepository.findById(newTrip.getTripRoute());
 
         if (optionalTripRoute.isEmpty()) {
-            throw new RuntimeException("Trip Route Not Found!!");
+            throw new GeneratedApiException(404, "Trip Route Not Found!!");
         }
 
 
@@ -100,7 +100,7 @@ public class TripService {
         Optional<Users> optionalDriver = userRepository.findById(newTrip.getDriver());
 
         if(optionalDriver.isEmpty()) {
-            throw new RuntimeException("Driver Not Found!!");
+            throw new GeneratedApiException(404, "Driver Not Found!!");
         }
 
         createdTrip.setDriver(optionalDriver.get());
@@ -175,7 +175,7 @@ public class TripService {
         Optional<Trip> optionalTrip = tripRepository.findById(tripId);
 
         if(optionalTrip.isEmpty()) {
-            throw new RuntimeException("Trip Details Not Found!!");
+            throw new GeneratedApiException(404, "Trip Details Not Found!!");
         }
 
         Trip trip = optionalTrip.get();

@@ -5,6 +5,7 @@ import com.trip_service.trip_service.route.models.VehicleDetails;
 import com.trip_service.trip_service.route.repositories.VehicleDetailsRepository;
 import com.trip_service.trip_service.users.models.Users;
 import com.trip_service.trip_service.users.repositories.UserRepository;
+import com.trip_service.trip_service.utils.exceptions.GeneratedApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +24,14 @@ public class VehicleService {
 
         // Check if Vehicle is Already Exist
         if(vehicleDetailsRepository.existsByRegistrationNumber(vehicleDetails.getRegistrationNumber())) {
-            throw new RuntimeException("Vehicle Already Exists!");
+            throw new GeneratedApiException(404, "Vehicle Already Exists!");
         }
 
         // Fetch User by userName
         Optional<Users> user = userRepository.findById(vehicleDetails.getOwnerUserName());
 
         if( user.isEmpty() ) {
-            throw new RuntimeException("User not found!");
+            throw new GeneratedApiException(404, "User not found!");
         }
 
         Users actualUser = user.get();

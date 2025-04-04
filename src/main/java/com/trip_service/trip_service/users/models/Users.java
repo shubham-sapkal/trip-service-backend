@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -45,7 +44,7 @@ public class Users {
     @Column
     private List<String> role;
 
-    public List<String> addRole(String newRole) {
+    public void addRole(String newRole) {
 
         if(role == null) {
             role = new ArrayList<>();
@@ -56,11 +55,9 @@ public class Users {
             role.add(newRole);
         }
 
-        return role;
     }
 
-    public List<String> removeRole(String removeRole) {
+    public void removeRole(String removeRole) {
         role.remove(removeRole);
-        return role;
     }
 }

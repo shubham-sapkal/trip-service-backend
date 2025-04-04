@@ -5,7 +5,9 @@ import com.trip_service.trip_service.route.DTO.ResponseBodyDTO;
 import com.trip_service.trip_service.route.models.Trip;
 import com.trip_service.trip_service.route.services.TripService;
 import com.trip_service.trip_service.utils.DTO.SendResponse;
+import com.trip_service.trip_service.utils.exceptions.GeneratedApiException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,25 +28,33 @@ public class TripController {
 
     // API View to create Trip
     @PostMapping("/create")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'TRIP_ADMIN', 'TRIP_CREATER') ")
     public SendResponse<Trip> createTrip(@RequestBody RequestBodyDTO.TripCreationRequestBody newTrip ) {
 
         try {
-            return new SendResponse<>(200, "Trip Created Successfully!", tripService.createTrip(newTrip));
+            return new SendResponse<>(200, "Trip Created Successfully!", "", tripService.createTrip(newTrip));
+        }
+        catch (GeneratedApiException apiException){
+            return new SendResponse<>(apiException.getStatusCode(), apiException.getMessage(), apiException.getErrorMsg(), null);
         }
         catch (Exception e) {
-            return new SendResponse<>(500, e.getMessage(), null);
+            return new SendResponse<>(500, "Internal Server Error!!", e.getMessage(), null);
         }
 
     }
 
     // API View to get all trips
     @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'TRIP_ADMIN')")
     public SendResponse<List<ResponseBodyDTO.TripDetailsResponse>> getAllTrips() {
         try {
-            return new SendResponse<>(200, "Data Retrieved Successfully!!", tripService.getAllTrips());
+            return new SendResponse<>(200, "Data Retrieved Successfully!!", "",tripService.getAllTrips());
+        }
+        catch (GeneratedApiException apiException){
+            return new SendResponse<>(apiException.getStatusCode(), apiException.getMessage(), apiException.getErrorMsg(), null);
         }
         catch (Exception e) {
-            return new SendResponse<>(500, e.getMessage(), null);
+            return new SendResponse<>(500, "Internal Server Error!!", e.getMessage(), null);
         }
     }
 
@@ -52,10 +62,13 @@ public class TripController {
     public SendResponse<ResponseBodyDTO.TripDetailsResponse> getTripById(@PathVariable UUID tripId ) {
 
         try {
-            return new SendResponse<>(200, "Trip Found Successfully!", tripService.getTripById(tripId));
+            return new SendResponse<>(200, "Trip Found Successfully!","", tripService.getTripById(tripId));
+        }
+        catch (GeneratedApiException apiException){
+            return new SendResponse<>(apiException.getStatusCode(), apiException.getMessage(), apiException.getErrorMsg(), null);
         }
         catch (Exception e) {
-            return new SendResponse<>(500, e.getMessage(), null);
+            return new SendResponse<>(500, "Internal Server Error!!", e.getMessage(), null);
         }
 
     }
