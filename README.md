@@ -66,6 +66,6 @@ To run this project, you will need to add the following environment variables to
 `DB_PASSWORD`<- Database Password (Example: Root) 
 
 `JWT_SIGNING_KEY` <-  JWT SIGNING KEY (Can Be Anything, Example: asdsdfsefwerfrgfdgergdefggerregr)
-`
+
 
 
