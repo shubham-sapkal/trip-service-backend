@@ -45,7 +45,6 @@ public class TripController {
 
     // API View to get all trips
     @GetMapping("/all")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'TRIP_ADMIN')")
     public SendResponse<List<ResponseBodyDTO.TripDetailsResponse>> getAllTrips() {
         try {
             return new SendResponse<>(200, "Data Retrieved Successfully!!", "",tripService.getAllTrips());

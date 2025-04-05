@@ -1,5 +1,11 @@
-#### Users API
 
+### Master Query to give roles to user: 
+
+
+# Users API
+API Listing for Users related apis.
+
+## User Login
 ```http
   POST /users/login
 ```
@@ -11,6 +17,7 @@
 
 ROLE Required to Access: Anyone on internet
 
+## Register User
 ```http
   POST /users/create
 ```
@@ -29,14 +36,14 @@ ROLE Required to Access: Anyone on internet
 
 ROLE Required to Access: Anyone on internet
 
-
+## Get Users List
 ```http
   POST /users/list
 ```
 
 ROLE Required to Access: [ "ADMIN" ]
 
-
+## Get Users Info
 ```http
   POST /users/get-user-info
 ```
@@ -48,7 +55,7 @@ ROLE Required to Access: [ "ADMIN" ]
 
 ROLE Required to Access: Anyone on internet
 
-
+## Manipulate Users Role
 ```http
   POST /users/manipulate-user-role
 ```

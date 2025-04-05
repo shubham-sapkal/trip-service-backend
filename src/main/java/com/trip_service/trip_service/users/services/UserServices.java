@@ -102,6 +102,9 @@ public class UserServices implements UserDetailsService {
 
     public List<String> manipulateRole( String changeType, String username, String role) {
 
+        if ( !Arrays.asList("ADD", "REMOVE").contains(changeType) ) {
+            throw new GeneratedApiException(404, "ChangeType Not found!");
+        }
 
         Optional<Users> updatedUser = userRepository.findById(username).map( users -> {
             if(changeType.equals("ADD"))
