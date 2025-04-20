@@ -1,0 +1,464 @@
+{
+	"info": {
+		"_postman_id": "ae192c42-dc25-4e73-b7ee-b5acc867781a",
+		"name": "trip-service-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34344001"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Admin User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"shubhamsapkal\",\r\n    \"firstName\": \"Shubham\",\r\n    \"lastName\": \"Sapkal\",\r\n    \"email\": \"shubhamsapkal7052@gmail.com\",\r\n    \"password\": \"Shubham@123\",\r\n    \"phoneNo\": \"8097102350\",\r\n    \"address\": \"AShok Samrat Chawl, Ramabai Ambedkar Nagar, Ghatkopar(E), mumbai - 400075\",\r\n    \"bookingStationAddress\": \"Ghatkopar Railway Station, mumbai - 400074\",\r\n    \"bookingStationPincode\": \"400074\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"shubhamsapkal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/get-user-info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"get-user-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"shubhamsapkal\",\r\n    \"password\": \"Shubham@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "manupulate role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"changeType\": \"REMOVE\",\r\n    \"username\": \"shubhamsapkal\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/manipulate-user-role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"manipulate-user-role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Register Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"registrationNumber\": \"MH03BT7052\",\r\n    \"ownerUserName\": \"shubhamsapkal\",\r\n    \"noOfSeats\": \"12\",\r\n    \"pricePerKm\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/vehicle/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vehicle",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trip",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"createdBy\": \"shubhamsapkal\",\r\n    \"vehicleDetails\": \"5912aec6-62dc-4a66-a7bd-9aca60097fe8\",\r\n    \"tripRoute\": \"08638f42-6600-4074-a727-5a6c5f16181f\",\r\n    \"driver\": \"shubhamsapkal\",\r\n    \"tripStartDate\": \"2025-03-25 09:00:00\",\r\n    \"tripEndDate\": \"2025-03-25 15:30:00\",\r\n    \"isReturnTrip\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trip/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Trip",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trip/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Trip By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"createdBy\": \"shubhamsapkal\",\r\n    \"vehicleDetails\": \"5912aec6-62dc-4a66-a7bd-9aca60097fe8\",\r\n    \"tripRoute\": \"d85dcfdf-9092-4bb5-9ff3-87b950f80bab\",\r\n    \"driver\": \"shubhamsapkal\",\r\n    \"tripStartDate\": \"2025-03-25 09:00:00\",\r\n    \"tripEndDate\": \"2025-03-25 15:30:00\",\r\n    \"isReturnTrip\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trip/trip-details/159b234d-18a2-43cd-9cf9-9658d2f682c6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"trip-details",
+								"159b234d-18a2-43cd-9cf9-9658d2f682c6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Route",
+			"item": [
+				{
+					"name": "Create Route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"shubhamsapkal\",\r\n    \"routeName\": \"Mumbai - Pune via Mega Highway\",\r\n    \"routeDestination\": \"Swargate Pune\",\r\n    \"routeOrigin\": \"Kurla Nehru Nagar\",\r\n    \"routeStops\": [\r\n        {\r\n            \"locationName\": \"Vashi Naka\",\r\n            \"cityName\": \"Navi Mumbai\",\r\n            \"pinCode\": \"400078\"\r\n        },\r\n        {\r\n            \"locationName\": \"Panvel\",\r\n            \"cityName\": \"Navi Mumbai\",\r\n            \"pinCode\": \"400102\"\r\n        },\r\n        {\r\n            \"locationName\": \"Lonavala\",\r\n            \"cityName\": \"lonavala\",\r\n            \"pinCode\": \"400110\"\r\n        },\r\n        {\r\n            \"locationName\": \"Wakad\",\r\n            \"cityName\": \"Pune\",\r\n            \"pinCode\": \"400222\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/route/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Routes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"shubhamsapkal\",\r\n    \"routeName\": \"Mumbai - Pune 22\",\r\n    \"routeDestination\": \"Swargate Pune\",\r\n    \"routeOrigin\": \"Kurla Nehru Nagar\",\r\n    \"routeStops\": [\r\n        {\r\n            \"locationName\": \"Vashi Naka\",\r\n            \"cityName\": \"Navi Mumbai\",\r\n            \"pinCode\": \"400078\"\r\n        },\r\n        {\r\n            \"locationName\": \"Panvel\",\r\n            \"cityName\": \"Navi Mumbai\",\r\n            \"pinCode\": \"400102\"\r\n        },\r\n        {\r\n            \"locationName\": \"Lonavala\",\r\n            \"cityName\": \"lonavala\",\r\n            \"pinCode\": \"400110\"\r\n        },\r\n        {\r\n            \"locationName\": \"Wakad\",\r\n            \"cityName\": \"Pune\",\r\n            \"pinCode\": \"400222\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/route/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
