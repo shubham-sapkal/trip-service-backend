@@ -26,46 +26,75 @@ USERS API - [[ LINK TO USERS API DOCS ]](https://github.com/shubham-sapkal/trip-
 ROUTES API - [[ LINK TO ROUTES API DOCS ]](https://github.com/shubham-sapkal/trip-service-backend/tree/master/src/main/java/com/trip_service/trip_service/route)
 
 
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://link-to-project
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  mvnw clean install
-```
-
-Start the server
-
-```bash
-  mvnw spring-boot:run
-```
-
 
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`DB_URL`  <- Database URL (Example: localhost:5432)
+`DB_URL`  <- Database URL (Example: `localhost:5432` when running locally and `host.docker.internal:5432` when running throw docker container with postgres at local )
 
 `DB_NAME` <- Database Name (Example: postgres )
 
 `DB_USERNAME` <- Database Username (Example: postgres)
 
-`DB_PASSWORD`<- Database Password (Example: Root) 
+`DB_PASSWORD`<- Database Password (Example: Root)
 
-`JWT_SIGNING_KEY` <-  JWT SIGNING KEY (Can Be Anything, Example: asdsdfsefwerfrgfdgergdefggerregr)
+`JWT_SIGNING_KEY` <-  JWT SIGNING KEY (Can Be Anything should be able to encrypt HS512 algorithm and signing key size should be greater than 512 bits, Example: asdsdfsefweasdasdasdasdasdasdassadssadasdsdasdsasrfrgfdgergdefggerregr)
 
 
+## Run Locally
 
+#### Mandatory to have:
+1. Java 21 install
+2. JAVA_HOME setup
+
+Step 1: Clone the project
+```bash
+  git clone https://github.com/shubham-sapkal/trip-service-backend
+```
+
+Step 2: Go to the project directory
+```bash
+  cd trip-service-backend
+```
+
+Step 3: Install dependencies
+
+```bash
+  mvnw clean install
+```
+
+Step 4: Install dotenv-cli (for .env)
+
+```bash
+    npm install -g dotenv-cli
+```
+
+Step 5: Start the server
+
+```bash
+  dotenv -e .env -- mvnw spring-boot:run
+```
+
+## Run Using Docker
+
+#### Mandatory to have:
+1. Postgres
+2. Docker Desktop
+
+Step 1: Clone the Repository
+```bash
+    git clone https://github.com/shubham-sapkal/trip-service-backend
+```
+
+Step 2: Move to that repository
+```bash
+    cd trip-service-backend
+```
+
+Step 3: Create .env File
+
+Step 4: Up trip-service-backend container
+```bash
+    docker compose up
+```
