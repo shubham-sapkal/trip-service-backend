@@ -2,8 +2,7 @@ version: '3.8'
 
 services:
   app:
-    build: .
-    container_name: spring-app
+    image: shubhamsapkal1/trip-service-backend:latest
     ports:
       - "8080:8080"
     env_file:
