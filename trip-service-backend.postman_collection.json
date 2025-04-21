@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"value": "{{TRIP_SERVICE_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -25,45 +25,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/list",
-							"protocol": "http",
+							"raw": "{{TRIP_SERVICE_LOCAL}}/users/list",
 							"host": [
-								"localhost"
+								"{{TRIP_SERVICE_LOCAL}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
 								"list"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Admin User",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TRIP_SERIVE_TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/admin",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"admin"
 							]
 						}
 					},
@@ -76,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"shubhamsapkal\",\r\n    \"firstName\": \"Shubham\",\r\n    \"lastName\": \"Sapkal\",\r\n    \"email\": \"shubhamsapkal7052@gmail.com\",\r\n    \"password\": \"Shubham@123\",\r\n    \"phoneNo\": \"8097102350\",\r\n    \"address\": \"AShok Samrat Chawl, Ramabai Ambedkar Nagar, Ghatkopar(E), mumbai - 400075\",\r\n    \"bookingStationAddress\": \"Ghatkopar Railway Station, mumbai - 400074\",\r\n    \"bookingStationPincode\": \"400074\"\r\n}",
+							"raw": "{\r\n    \"userName\": \"shubhamsapkal1\",\r\n    \"firstName\": \"Shubham\",\r\n    \"lastName\": \"Sapkal\",\r\n    \"email\": \"shubhamsapkal7052@gmail.com\",\r\n    \"password\": \"Shubham@123\",\r\n    \"phoneNo\": \"8097102350\",\r\n    \"address\": \"AShok Samrat Chawl, Ramabai Ambedkar Nagar, Ghatkopar(E), mumbai - 400075\",\r\n    \"bookingStationAddress\": \"Ghatkopar Railway Station, mumbai - 400074\",\r\n    \"bookingStationPincode\": \"400074\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -84,12 +52,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/create",
-							"protocol": "http",
+							"raw": "{{TRIP_SERVICE_LOCAL}}/users/create",
 							"host": [
-								"localhost"
+								"{{TRIP_SERVICE_LOCAL}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
 								"create"
@@ -152,12 +118,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/login",
-							"protocol": "http",
+							"raw": "{{TRIP_SERVICE_LOCAL}}/users/login",
 							"host": [
-								"localhost"
+								"{{TRIP_SERVICE_LOCAL}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
 								"login"
@@ -167,7 +131,7 @@
 					"response": []
 				},
 				{
-					"name": "manupulate role",
+					"name": "Manipulate Roles",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -218,7 +182,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"value": "{{TRIP_SERVICE_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -235,12 +199,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/vehicle/register",
-							"protocol": "http",
+							"raw": "{{TRIP_SERVICE_LOCAL}}/vehicle/register",
 							"host": [
-								"localhost"
+								"{{TRIP_SERVICE_LOCAL}}"
 							],
-							"port": "8080",
 							"path": [
 								"vehicle",
 								"register"
@@ -262,7 +224,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"value": "{{TRIP_SERVICE_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -279,12 +241,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/trip/create",
-							"protocol": "http",
+							"raw": "{{TRIP_SERVICE_LOCAL}}/trip/create",
 							"host": [
-								"localhost"
+								"{{TRIP_SERVICE_LOCAL}}"
 							],
-							"port": "8080",
 							"path": [
 								"trip",
 								"create"
@@ -304,7 +264,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"value": "{{TRIP_SERVICE_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -321,12 +281,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/trip/all",
-							"protocol": "http",
+							"raw": "{{TRIP_SERVICE_LOCAL}}/trip/all",
 							"host": [
-								"localhost"
+								"{{TRIP_SERVICE_LOCAL}}"
 							],
-							"port": "8080",
 							"path": [
 								"trip",
 								"all"
@@ -343,7 +301,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"value": "{{TRIP_SERVICE_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -360,12 +318,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/trip/trip-details/159b234d-18a2-43cd-9cf9-9658d2f682c6",
-							"protocol": "http",
+							"raw": "{{TRIP_SERVICE_LOCAL}}/trip/trip-details/159b234d-18a2-43cd-9cf9-9658d2f682c6",
 							"host": [
-								"localhost"
+								"{{TRIP_SERVICE_LOCAL}}"
 							],
-							"port": "8080",
 							"path": [
 								"trip",
 								"trip-details",
@@ -388,7 +344,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"value": "{{TRIP_SERVICE_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -405,12 +361,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/route/create",
-							"protocol": "http",
+							"raw": "{{TRIP_SERVICE_LOCAL}}/route/create",
 							"host": [
-								"localhost"
+								"{{TRIP_SERVICE_LOCAL}}"
 							],
-							"port": "8080",
 							"path": [
 								"route",
 								"create"
@@ -427,7 +381,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{TRIP_SERIVE_TOKEN}}",
+									"value": "{{TRIP_SERVICE_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -444,12 +398,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/route/all",
-							"protocol": "http",
+							"raw": "{{TRIP_SERVICE_LOCAL}}/route/all",
 							"host": [
-								"localhost"
+								"{{TRIP_SERVICE_LOCAL}}"
 							],
-							"port": "8080",
 							"path": [
 								"route",
 								"all"
