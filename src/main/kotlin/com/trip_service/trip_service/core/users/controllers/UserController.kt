@@ -7,6 +7,7 @@ import com.trip_service.trip_service.core.users.services.UserService
 import com.trip_service.trip_service.helpers.DTO.GenerateResponse
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -67,6 +68,7 @@ class UserController {
     }
 
     @GetMapping("/user-info/{username}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     fun getUserInfo(@PathVariable username: String): GenerateResponse<Users> {
 
         try {

@@ -3,7 +3,10 @@ package com.trip_service.trip_service.core.users.services
 import com.trip_service.trip_service.core.users.models.Users
 import com.trip_service.trip_service.core.users.repositories.UserRepository
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
+import com.trip_service.trip_service.security.DTO.DTO
+import com.trip_service.trip_service.security.jwt.JwtUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -12,6 +15,9 @@ class UserService {
 
     @Autowired
     private lateinit var userRepository: UserRepository;
+
+    @Autowired
+    private lateinit var jwtUtils: JwtUtils;
 
     // Service Function for creating new User
     fun createUser(user: Users): String {
@@ -42,7 +48,11 @@ class UserService {
         if( users.password.equals(password) ) {
 
             // Generate JWT Auth Token
-            return "asdsad"
+            return this.jwtUtils.generateToken(DTO.GenerateToken(
+                users.username,
+                users.email,
+                users.roles
+            ))
 
         }
         else {
@@ -57,6 +67,7 @@ class UserService {
     }
 
     // Get All Users
+    @PreAuthorize("hasAnyAuthority('SUPER_ADMIN')")
     fun getAllUsers(): List<Users> {
         return userRepository.findAll();
     }

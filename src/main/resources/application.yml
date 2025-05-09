@@ -23,6 +23,8 @@ spring:
       hibernate:
         default_schema: public
 
+  security:
+    jwt_signing_key: ${JWT_SIGNING_KEY}
 
 server:
   address: 0.0.0.0
