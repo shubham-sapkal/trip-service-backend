@@ -73,19 +73,11 @@ class UserController {
 
         try {
 
-            val user: Optional<Users> = userService.getUserById(username);
+            val foundUser: Users = userService.getUserById(username);
 
-            if(user.isPresent) {
-
-                val foundUser: Users = user.get()
-
-                return GenerateResponse(
-                    200, "User Details Found!", "", foundUser
-                )
-            }
-            else {
-                return GenerateResponse(404, "", "User Details Not Found")
-            }
+            return GenerateResponse(
+                200, "User Details Found!", "", foundUser
+            )
 
         }
         catch (exception: GenerateApiException) {

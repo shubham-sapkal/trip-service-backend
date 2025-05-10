@@ -22,11 +22,7 @@ class UserService {
     // Service Function for creating new User
     fun createUser(user: Users): String {
 
-        val foundUser: Optional<Users> = getUserById(user.username)
-
-        if(foundUser.isPresent) {
-            throw GenerateApiException(409, "User Already Exists!!")
-        }
+        getUserById(user.username)
 
         userRepository.save(user)
 
@@ -37,13 +33,7 @@ class UserService {
     // Login Users
     fun login(username: String, password: String): String {
 
-        val foundUser: Optional<Users> = getUserById(username)
-
-        if(foundUser.isEmpty) {
-            throw GenerateApiException(404, "User Not Found!")
-        }
-
-        val users: Users  = foundUser.get();
+        val users: Users = getUserById(username);
 
         if( users.password.equals(password) ) {
 
@@ -62,8 +52,15 @@ class UserService {
     }
 
     // Get Users by username
-    fun getUserById(username: String): Optional<Users> {
-        return userRepository.findById(username);
+    fun getUserById(username: String): Users {
+
+        val optionalUsers: Optional<Users> = userRepository.findById(username)
+
+        if (optionalUsers.isEmpty) {
+            throw GenerateApiException(404, "User Details Not Found!");
+        }
+
+        return optionalUsers.get();
     }
 
     // Get All Users

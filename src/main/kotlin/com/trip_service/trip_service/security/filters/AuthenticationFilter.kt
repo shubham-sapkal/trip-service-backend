@@ -85,44 +85,38 @@ class AuthenticationFilter : OncePerRequestFilter() {
         if( username != null && SecurityContextHolder.getContext().authentication == null ) {
 
             // Extract User Information
-            val optionalUser: Optional<Users> = this.userServices.getUserById(username);
+            val user: Users = this.userServices.getUserById(username);
 
-            if( optionalUser.isEmpty ) {
-                logger.info("User Not Found!!");
-            }
-            else {
-                // Validate Token For User Details
-                val user: Users = optionalUser.get();
 
-                if(token != null) {
-                    val validateToken: Boolean = this.jwtUtils.validateToken(token, DTO.GenerateToken(
-                        user.username,
-                        user.email,
-                        user.roles
-                    ));
+            if(token != null) {
+                val validateToken: Boolean = this.jwtUtils.validateToken(token, DTO.GenerateToken(
+                    user.username,
+                    user.email,
+                    user.roles
+                ));
 
-                    var grantedAuthorities: List<GrantedAuthority> = ArrayList();
-                    val userRole = user.roles;
+                var grantedAuthorities: List<GrantedAuthority> = ArrayList();
+                val userRole = user.roles;
 
-                    if(userRole.isNotEmpty()) {
-                        grantedAuthorities = user.roles.map { SimpleGrantedAuthority(it) }
-                    }
+                if(userRole.isNotEmpty()) {
+                    grantedAuthorities = user.roles.map { SimpleGrantedAuthority(it) }
+                }
 
-                    if (validateToken) {
-                        val authentication = UsernamePasswordAuthenticationToken(
-                            user,
-                            null,
-                            grantedAuthorities
-                        );
+                if (validateToken) {
+                    val authentication = UsernamePasswordAuthenticationToken(
+                        user,
+                        null,
+                        grantedAuthorities
+                    );
 
-                        authentication.details = WebAuthenticationDetailsSource().buildDetails(request);
-                        SecurityContextHolder.getContext().authentication = authentication;
-                    }
-                    else {
-                        logger.info("Validation Failed!!")
-                    }
+                    authentication.details = WebAuthenticationDetailsSource().buildDetails(request);
+                    SecurityContextHolder.getContext().authentication = authentication;
+                }
+                else {
+                    logger.info("Validation Failed!!")
                 }
             }
+
         }
 
         filterChain.doFilter(request, response);
