@@ -22,7 +22,11 @@ class UserService {
     // Service Function for creating new User
     fun createUser(user: Users): String {
 
-        getUserById(user.username)
+        val optionalUser: Optional<Users> = userRepository.findById(user.username);
+
+        if(optionalUser.isPresent) {
+            throw GenerateApiException(404, "User Details Found!!")
+        }
 
         userRepository.save(user)
 

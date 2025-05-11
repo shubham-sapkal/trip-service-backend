@@ -85,8 +85,12 @@ No specific role required. Open to All
 #### Response Object
 
 ```
-{
 
+{
+    "status": 200,
+    "message": "Login Successful!",
+    "errorMessage": "",
+    "result": "<JWT_AUTH_TOKEN>"
 }
 ```
 
@@ -117,7 +121,10 @@ No specific role required. Open to All
 
 ```
 {
-
+    "status": 200,
+    "message": "User is Created!!",
+    "errorMessage": "",
+    "result": null
 }
 ```
 
