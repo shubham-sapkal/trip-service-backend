@@ -6,11 +6,10 @@ import com.trip_service.trip_service.core.routes.models.Routes
 import com.trip_service.trip_service.core.routes.repositories.RouteRepository
 import com.trip_service.trip_service.core.users.models.Users
 import com.trip_service.trip_service.core.users.services.UserService
-import jakarta.persistence.Column
-import jakarta.persistence.ElementCollection
-import jakarta.persistence.ManyToOne
-import org.apache.catalina.User
+import com.trip_service.trip_service.helpers.errors.GenerateApiException
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class RouteServices(
@@ -23,24 +22,38 @@ class RouteServices(
     */
     fun createRoute( route: RoutesReqBody.createRoutes ): String {
 
-        // Get User
-        val createdBy: Users = userService.getUserById(route.createdBy)
+        try{
 
-        println("Total Distance: " + route.totalDistance);
+            // Get User
+            val createdBy: Users = userService.getUserById(route.createdBy)
 
-        // Create Route Object
-        val newRoute = Routes(
-            routeName=route.routeName,
-            routeOrigin=route.routeOrigin,
-            routeDestination=route.routeDestination,
-            totalDistance=route.totalDistance.toDouble(),
-            routeStops=route.routeStops,
-            createdBy=createdBy
-        )
+            // Create Route Object
+            val newRoute = Routes(
+                routeName=route.routeName,
+                routeOrigin=route.routeOrigin,
+                routeDestination=route.routeDestination,
+                totalDistance=route.totalDistance,
+                routeStops=route.routeStops,
+                createdBy=createdBy
+            )
 
-        routeRepository.save(newRoute);
+            routeRepository.save(newRoute);
 
-        return "Route Created Successfully!"
+            return "Route Created Successfully!"
+        }
+        catch (e: DataIntegrityViolationException) {   // TODO: Check proper Exception here
+            throw GenerateApiException(
+                204,
+                "Route Already Exists!"
+            )
+        }
+        catch (e: Exception){
+            throw GenerateApiException(
+                500,
+                e.message ?: "Internal Server Error!"
+            )
+        }
+
     }
 
 
@@ -53,7 +66,15 @@ class RouteServices(
 
 
     /*
-    * Service Fun to get route By Id
+    * Service Fun to get route By ID
     */
+    fun getRouteById( routeId: UUID ): Routes {
+        return routeRepository.findById(routeId).orElseThrow {
+            GenerateApiException(
+                404,
+                "Route Not Found!"
+            )
+        }
+    }
 
 }

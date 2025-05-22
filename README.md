@@ -58,16 +58,17 @@ Step 2: Go to the project directory
   cd trip-service-backend
 ```
 
-Step 3: Install dependencies
-
-```bash
-  mvnw clean install
-```
-
-Step 4: Install dotenv-cli (for .env)
+Step 3: Install dotenv-cli (for .env)
 
 ```bash
     npm install -g dotenv-cli
+```
+
+
+Step 4: Install dependencies
+
+```bash
+  dotenv -e .env -- mvnw clean install
 ```
 
 Step 5: Start the server

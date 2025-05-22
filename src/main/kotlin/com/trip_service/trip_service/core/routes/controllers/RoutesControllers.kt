@@ -6,9 +6,12 @@ import com.trip_service.trip_service.core.routes.services.RouteServices
 import com.trip_service.trip_service.helpers.DTO.GenerateResponse
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.UUID
 
 @RestController
 @RequestMapping("/routes")
@@ -17,7 +20,7 @@ class RoutesControllers(
 ) {
 
     @PostMapping("/create")
-    fun createRoute(route: RoutesReqBody.createRoutes): GenerateResponse<String> {
+    fun createRoute(@RequestBody route: RoutesReqBody.createRoutes): GenerateResponse<String> {
 
         try {
 
@@ -48,6 +51,26 @@ class RoutesControllers(
                 "Routes Fetch Successfully!",
                 "",
                 routeServices.getAllRoutes()
+            )
+        }
+        catch (exception: GenerateApiException) {
+            return GenerateResponse(
+                exception.status,
+                "",
+                exception.errorMessage,
+                null
+            )
+        }
+    }
+
+    @GetMapping("/{routeId}")
+    fun getRouteById( @PathVariable routeId: UUID): GenerateResponse<Routes> {
+        try {
+            return GenerateResponse(
+                200,
+                "Route Fetch Successfully!",
+                "",
+                routeServices.getRouteById(routeId)
             )
         }
         catch (exception: GenerateApiException) {

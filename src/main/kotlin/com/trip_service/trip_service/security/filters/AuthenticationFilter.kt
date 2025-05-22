@@ -1,5 +1,6 @@
 package com.trip_service.trip_service.security.filters
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.trip_service.trip_service.core.users.models.Users
 import com.trip_service.trip_service.core.users.services.UserService
 import com.trip_service.trip_service.security.DTO.DTO
@@ -44,82 +45,99 @@ class AuthenticationFilter : OncePerRequestFilter() {
         filterChain: FilterChain
     ) {
 
-        // Authorization
-        if(request.getHeader("Authorization") == null) {
-            filterChain.doFilter(request, response);
-            return ;
-        }
+        try {
 
-        val requestHeader: String = request.getHeader("Authorization");
-
-        var username: String? = null;
-        var token: String? = null;
-
-        if(requestHeader.startsWith("Bearer")) {
-
-            // Here means, Bearer Token is valid
-
-            token = requestHeader.substring(7);
-
-            try {
-                username = this.jwtUtils.getUsernameFromToken(token);
-            }
-            catch (e: IllegalArgumentException) {
-                logger.info("Illegal Argument while fetching the username !!")
-                e.printStackTrace()
-            } catch (e: ExpiredJwtException) {
-                logger.info("Given jwt token is expired !!");
-                e.printStackTrace();
-            } catch (e: MalformedJwtException) {
-                logger.info("Some changed has done in token !! Invalid Token");
-                e.printStackTrace();
-            } catch (e: Exception) {
-                e.printStackTrace();
+            // Authorization
+            if(request.getHeader("Authorization") == null) {
+                filterChain.doFilter(request, response);
+                return ;
             }
 
-        }
-        else {
-            logger.info("Invalid Header Value!!");
-        }
+            val requestHeader: String = request.getHeader("Authorization");
 
-        if( username != null && SecurityContextHolder.getContext().authentication == null ) {
+            var username: String? = null;
+            var token: String? = null;
 
-            // Extract User Information
-            val user: Users = this.userServices.getUserById(username);
+            if(requestHeader.startsWith("Bearer")) {
 
+                // Here means, Bearer Token is valid
 
-            if(token != null) {
-                val validateToken: Boolean = this.jwtUtils.validateToken(token, DTO.GenerateToken(
-                    user.username,
-                    user.email,
-                    user.roles
-                ));
+                token = requestHeader.substring(7);
 
-                var grantedAuthorities: List<GrantedAuthority> = ArrayList();
-                val userRole = user.roles;
-
-                if(userRole.isNotEmpty()) {
-                    grantedAuthorities = user.roles.map { SimpleGrantedAuthority(it) }
+                try {
+                    username = this.jwtUtils.getUsernameFromToken(token);
+                }
+                catch (e: IllegalArgumentException) {
+                    logger.info("Illegal Argument while fetching the username !!")
+                    e.printStackTrace()
+                } catch (e: ExpiredJwtException) {
+                    logger.info("Given jwt token is expired !!");
+                    e.printStackTrace();
+                } catch (e: MalformedJwtException) {
+                    logger.info("Some changed has done in token !! Invalid Token");
+                    e.printStackTrace();
+                } catch (e: Exception) {
+                    e.printStackTrace();
                 }
 
-                if (validateToken) {
-                    val authentication = UsernamePasswordAuthenticationToken(
-                        user,
-                        null,
-                        grantedAuthorities
-                    );
-
-                    authentication.details = WebAuthenticationDetailsSource().buildDetails(request);
-                    SecurityContextHolder.getContext().authentication = authentication;
-                }
-                else {
-                    logger.info("Validation Failed!!")
-                }
+            }
+            else {
+                logger.info("Invalid Header Value!!");
             }
 
-        }
+            if( username != null && SecurityContextHolder.getContext().authentication == null ) {
 
-        filterChain.doFilter(request, response);
+                // Extract User Information
+                val user: Users = this.userServices.getUserById(username);
+
+
+                if(token != null) {
+                    val validateToken: Boolean = this.jwtUtils.validateToken(token, DTO.GenerateToken(
+                        user.username,
+                        user.email,
+                        user.roles
+                    ));
+
+                    var grantedAuthorities: List<GrantedAuthority> = ArrayList();
+                    val userRole = user.roles;
+
+                    if(userRole.isNotEmpty()) {
+                        grantedAuthorities = user.roles.map { SimpleGrantedAuthority(it) }
+                    }
+
+                    if (validateToken) {
+                        val authentication = UsernamePasswordAuthenticationToken(
+                            user,
+                            null,
+                            grantedAuthorities
+                        );
+
+                        authentication.details = WebAuthenticationDetailsSource().buildDetails(request);
+                        SecurityContextHolder.getContext().authentication = authentication;
+                    }
+                    else {
+                        logger.info("Validation Failed!!")
+                    }
+                }
+
+            }
+
+            // Your auth logic, e.g., token extraction, verification
+            filterChain.doFilter(request, response)
+
+        } catch (ex: Exception) {
+            // Log the exception or optionally rethrow
+            response.status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
+            response.contentType = "application/json"
+            val errorResponse = mapOf(
+                "status" to 500,
+                "error" to "Internal Server Error",
+                "message" to ex.message,
+                "path" to request.requestURI
+            )
+            val json = ObjectMapper().writeValueAsString(errorResponse)
+            response.writer.write(json)
+        }
 
     }
 }
