@@ -1,8 +1,8 @@
-package com.trip_service.trip_service.core.routes.controllers
+package com.trip_service.trip_service.core.trips.controllers
 
-import com.trip_service.trip_service.core.routes.DTO.RoutesReqBody
-import com.trip_service.trip_service.core.routes.models.Routes
-import com.trip_service.trip_service.core.routes.services.RouteServices
+import com.trip_service.trip_service.core.trips.dto.TripReqBody
+import com.trip_service.trip_service.core.trips.models.TripDetails
+import com.trip_service.trip_service.core.trips.services.TripServices
 import com.trip_service.trip_service.helpers.DTO.GenerateResponse
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,19 +14,22 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
 @RestController
-@RequestMapping("/routes")
-class RoutesControllers(
-    val routeServices: RouteServices
+@RequestMapping("/trips")
+class TripsController(
+    val tripServices : TripServices
 ) {
 
+    /*
+    * Controller For: Creating Trip
+    */
     @PostMapping("/create")
-    fun createRoute(@RequestBody route: RoutesReqBody.createRoutes): GenerateResponse<String> {
+    fun createTrip(@RequestBody tripDetails: TripReqBody.CreateTrip): GenerateResponse<String> {
 
-        try {
+        try{
 
             return GenerateResponse(
                 200,
-                routeServices.createRoute(route),
+                tripServices.createTrip(tripDetails),
                 "",
                 null
             )
@@ -43,15 +46,21 @@ class RoutesControllers(
 
     }
 
-    @GetMapping("/all")
-    fun getAllRoutes(): GenerateResponse<List<Routes>> {
-        try {
+    /*
+    * Controller For: Get All Trips
+    */
+    @PostMapping("/all")
+    fun getAllTrips(): GenerateResponse<List<TripDetails>> {
+
+        try{
+
             return GenerateResponse(
                 200,
-                "Routes Fetch Successfully!",
+                "Trip Fetch Successfully!",
                 "",
-                routeServices.getAllRoutes()
+                tripServices.getAllTrips()
             )
+
         }
         catch (exception: GenerateApiException) {
             return GenerateResponse(
@@ -61,23 +70,32 @@ class RoutesControllers(
                 null
             )
         }
+
     }
 
-    @GetMapping("/{routeId}")
-    fun getRouteById( @PathVariable routeId: UUID): GenerateResponse<Routes> {
+    /*
+    * Controller For:Get Trip Details By ID
+    */
+    @GetMapping("/{tripId}")
+    fun getTripById(@PathVariable tripId: UUID ): GenerateResponse<TripDetails> {
 
-        val optionalRoute = routeServices.getRouteById(routeId)
+        val tripDetails = tripServices.getTripDetailsById(tripId)
 
-        if (optionalRoute.isEmpty) {
-            throw GenerateApiException(404, "Route Not Found!")
+        if ( tripDetails.isEmpty ) {
+            return GenerateResponse(
+                404,
+                "",
+                "Trip Not Found",
+                null
+            )
         }
 
         try {
             return GenerateResponse(
                 200,
-                "Route Fetch Successfully!",
+                "Trip Fetch Successfully!",
                 "",
-                optionalRoute.get()
+                tripDetails.get()
             )
         }
         catch (exception: GenerateApiException) {

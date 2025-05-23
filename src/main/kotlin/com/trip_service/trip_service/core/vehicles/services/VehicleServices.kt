@@ -8,6 +8,8 @@ import com.trip_service.trip_service.core.vehicles.models.Vehicles
 import com.trip_service.trip_service.core.vehicles.repositories.VehicleRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.Optional
+import java.util.UUID
 
 @Service
 class VehicleServices {
@@ -24,6 +26,7 @@ class VehicleServices {
 
         val vehicleOwner = userServices.getUserById(vehicle.vehicleOwner);
 
+        // TODO: Validate fuelType is correct or not
 
         val vehicleRegistery = Vehicles(
             vehicleRegNo = vehicle.vehicleRegNo,
@@ -41,6 +44,13 @@ class VehicleServices {
 
     fun getAllVehicles(): List<Vehicles> {
         return vehicleRepository.findAll();
+    }
+
+    /*
+    *  Get Vehicle By vehicleId
+    */
+    fun getVehicleById(vehicleId: UUID): Optional<Vehicles> {
+        return vehicleRepository.findById(vehicleId);
     }
 
 

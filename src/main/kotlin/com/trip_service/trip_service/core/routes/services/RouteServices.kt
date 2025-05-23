@@ -9,6 +9,7 @@ import com.trip_service.trip_service.core.users.services.UserService
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
+import java.util.Optional
 import java.util.UUID
 
 @Service
@@ -68,13 +69,8 @@ class RouteServices(
     /*
     * Service Fun to get route By ID
     */
-    fun getRouteById( routeId: UUID ): Routes {
-        return routeRepository.findById(routeId).orElseThrow {
-            GenerateApiException(
-                404,
-                "Route Not Found!"
-            )
-        }
+    fun getRouteById( routeId: UUID ): Optional<Routes> {
+        return routeRepository.findById(routeId)
     }
 
 }
