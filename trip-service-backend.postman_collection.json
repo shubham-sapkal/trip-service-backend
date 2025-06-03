@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "ae192c42-dc25-4e73-b7ee-b5acc867781a",
+		"name": "trip-service-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34344001"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERVICE_TOKEN}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{TRIP_SERVICE_LOCAL}}/users/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"shubhamsapkal1\",\r\n    \"firstName\": \"Shubham\",\r\n    \"lastName\": \"Sapkal\",\r\n    \"email\": \"shubhamsapkal7052@gmail.com\",\r\n    \"password\": \"Shubham@123\",\r\n    \"phoneNo\": \"8097102350\",\r\n    \"roles\": [\"USER\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{TRIP_SERVICE_LOCAL}}/users/create"
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": ""
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"shubhamsapkal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/users/get-user-info"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"shubhamsapkal1\",\r\n    \"password\": \"Shubham@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{TRIP_SERVICE_LOCAL}}/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Manipulate Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERIVE_TOKEN}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"changeType\": \"REMOVE\",\r\n    \"username\": \"shubhamsapkal\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/users/manipulate-user-role"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Register Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERVICE_TOKEN}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleRegNo\": \"MH03BT7052\",\r\n    \"vehicleOwner\": \"shubhamsapkal1\",\r\n    \"totalSeats\": \"12\",\r\n    \"pricePerKm\": 30,\r\n    \"fuelType\": \"PETROL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{TRIP_SERVICE_LOCAL}}/vehicles/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Vehicle All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERVICE_TOKEN}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "{{TRIP_SERVICE_LOCAL}}/vehicles/all"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trip",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERVICE_TOKEN}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tripName\": \"Mumbai to Pune Via Mega Highway\",\r\n    \"tripDescription\": \"Mumbai to Pune Via Mega Highway, One Stop Only\",\r\n    \"perPersonCost\": 533.0,\r\n    \"createdBy\": \"shubhamsapkal1\",\r\n    \"driver\": \"shubhamsapkal1\",\r\n    \"tripVehicleId\": \"e2c42f5f-416b-4b42-8e6e-90c2d4995334\",\r\n    \"tripRouteId\": \"7013a165-037e-43df-af9f-db5f8a7307a3\",\r\n    \"tripStartDate\": \"2025-05-25 09:00:00\",\r\n    \"tripEndDate\": \"2025-05-25 15:30:00\",\r\n    \"isReturnTrip\": false,\r\n    \"isAcAvailable\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{TRIP_SERVICE_LOCAL}}/trips/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Trip",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERVICE_TOKEN}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{TRIP_SERVICE_LOCAL}}/trips/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Trip By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERVICE_TOKEN}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"createdBy\": \"shubhamsapkal\",\r\n    \"vehicleDetails\": \"5912aec6-62dc-4a66-a7bd-9aca60097fe8\",\r\n    \"tripRoute\": \"d85dcfdf-9092-4bb5-9ff3-87b950f80bab\",\r\n    \"driver\": \"shubhamsapkal\",\r\n    \"tripStartDate\": \"2025-03-25 09:00:00\",\r\n    \"tripEndDate\": \"2025-03-25 15:30:00\",\r\n    \"isReturnTrip\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{TRIP_SERVICE_LOCAL}}/trips/6d8cc179-589a-4e76-ab59-10d6e936b1fc"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Route",
+			"item": [
+				{
+					"name": "Create Route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERVICE_TOKEN}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"createdBy\": \"shubhamsapkal1\",\r\n    \"routeName\": \"Mumbai - Pune via Mega Highway V2\",\r\n    \"routeDestination\":  {\r\n        \"stopSequence\": 1,\r\n        \"lat\": \"18.501059\",\r\n        \"long\": \"73.862686\",\r\n        \"locationName\": \"Swargate\",\r\n        \"cityName\": \"pune\",\r\n        \"pinCode\": \"411042\"\r\n    },\r\n    \"routeOrigin\":  {\r\n        \"stopSequence\": 6,\r\n        \"lat\": \"19.062054\",\r\n        \"long\": \"72.883438\",\r\n        \"locationName\": \"Kurla neheru Nagar\",\r\n        \"cityName\": \"Mumbai\",\r\n        \"pinCode\": \"400024\"\r\n    },\r\n    \"totalDistance\": 110.00,\r\n    \"routeStops\": [\r\n        {\r\n            \"stopSequence\": 2,\r\n            \"lat\": \"\",\r\n            \"long\": \"\",\r\n            \"locationName\": \"Vashi Naka\",\r\n            \"cityName\": \"Navi Mumbai\",\r\n            \"pinCode\": \"400078\"\r\n        },\r\n        {\r\n            \"stopSequence\": 3,\r\n            \"lat\": \"\",\r\n            \"long\": \"\",\r\n            \"locationName\": \"Panvel\",\r\n            \"cityName\": \"Navi Mumbai\",\r\n            \"pinCode\": \"400102\"\r\n        },\r\n        {\r\n            \"stopSequence\": 4,\r\n            \"lat\": \"\",\r\n            \"long\": \"\",\r\n            \"locationName\": \"Lonavala\",\r\n            \"cityName\": \"lonavala\",\r\n            \"pinCode\": \"400110\"\r\n        },\r\n        {\r\n            \"stopSequence\": 5,\r\n            \"lat\": \"\",\r\n            \"long\": \"\",\r\n            \"locationName\": \"Wakad\",\r\n            \"cityName\": \"Pune\",\r\n            \"pinCode\": \"400222\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{TRIP_SERVICE_LOCAL}}/routes/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Routes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERVICE_TOKEN}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{TRIP_SERVICE_LOCAL}}/routes/all"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Route By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TRIP_SERVICE_TOKEN}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{TRIP_SERVICE_LOCAL}}/routes/7013a165-037e-43df-af9f-db5f8a7307a3"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
