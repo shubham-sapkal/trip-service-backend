@@ -1,9 +1,9 @@
 package com.trip_service.trip_service.core.routes.controllers
 
-import com.trip_service.trip_service.core.routes.DTO.RoutesReqBody
+import com.trip_service.trip_service.core.routes.dto.RoutesReqBody
 import com.trip_service.trip_service.core.routes.models.Routes
 import com.trip_service.trip_service.core.routes.services.RouteServices
-import com.trip_service.trip_service.helpers.DTO.GenerateResponse
+import com.trip_service.trip_service.helpers.dto.GenerateResponse
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -20,7 +20,7 @@ class RoutesControllers(
 ) {
 
     @PostMapping("/create")
-    fun createRoute(@RequestBody route: RoutesReqBody.createRoutes): GenerateResponse<String> {
+    fun createRoute(@RequestBody route: RoutesReqBody.CreateRoutes): GenerateResponse<String> {
 
         try {
 

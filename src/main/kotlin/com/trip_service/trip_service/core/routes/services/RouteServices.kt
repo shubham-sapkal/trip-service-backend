@@ -1,7 +1,6 @@
 package com.trip_service.trip_service.core.routes.services
 
-import com.trip_service.trip_service.core.routes.DTO.RoutesReqBody
-import com.trip_service.trip_service.core.routes.models.RouteStops
+import com.trip_service.trip_service.core.routes.dto.RoutesReqBody
 import com.trip_service.trip_service.core.routes.models.Routes
 import com.trip_service.trip_service.core.routes.repositories.RouteRepository
 import com.trip_service.trip_service.core.users.models.Users
@@ -21,7 +20,7 @@ class RouteServices(
     /*
     * Service Fun to create Route
     */
-    fun createRoute( route: RoutesReqBody.createRoutes ): String {
+    fun createRoute( route: RoutesReqBody.CreateRoutes ): String {
 
         try{
 

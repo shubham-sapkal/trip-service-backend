@@ -164,14 +164,3 @@ The API uses a custom GenerateApiException for error handling, which returns:
 
 ### Users Object
 - The exact structure of the Users object would depend on your Users class implementation, but it's returned in the response data field.
-
-### Security
-- Endpoint security is implemented using Spring Security's @PreAuthorize annotation
-- Some endpoints require specific roles (e.g., ADMIN role)
-
-## Notes
-1. All responses use the GenerateResponse wrapper class for consistent response formatting
-
-2. Error handling is implemented using try-catch blocks with GenerateApiException
-
-3. Authentication details should be included in the request headers (implementation details not shown in the provided code)

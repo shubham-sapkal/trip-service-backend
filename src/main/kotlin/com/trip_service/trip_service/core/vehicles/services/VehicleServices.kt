@@ -2,7 +2,7 @@ package com.trip_service.trip_service.core.vehicles.services
 
 
 import com.trip_service.trip_service.core.users.services.UserService
-import com.trip_service.trip_service.core.vehicles.DTO.VehiclesRequestBody
+import com.trip_service.trip_service.core.vehicles.dto.VehiclesRequestBody
 import com.trip_service.trip_service.core.vehicles.models.FuelType
 import com.trip_service.trip_service.core.vehicles.models.Vehicles
 import com.trip_service.trip_service.core.vehicles.repositories.VehicleRepository
@@ -20,7 +20,7 @@ class VehicleServices {
     @Autowired
     private lateinit var userServices: UserService;
 
-    fun createNewVehicle(vehicle: VehiclesRequestBody.createVehicles) {
+    fun createNewVehicle(vehicle: VehiclesRequestBody.CreateVehicles) {
 
         // TODO: Check if vehicle already exists
 

@@ -1,9 +1,9 @@
 package com.trip_service.trip_service.core.vehicles.controllers
 
-import com.trip_service.trip_service.core.vehicles.DTO.VehiclesRequestBody
+import com.trip_service.trip_service.core.vehicles.dto.VehiclesRequestBody
 import com.trip_service.trip_service.core.vehicles.models.Vehicles
 import com.trip_service.trip_service.core.vehicles.services.VehicleServices
-import com.trip_service.trip_service.helpers.DTO.GenerateResponse
+import com.trip_service.trip_service.helpers.dto.GenerateResponse
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
@@ -22,7 +22,7 @@ class VehicleController {
     Create Vehicle
     */
     @PostMapping("/register")
-    fun createVehicle(@RequestBody vehicle: VehiclesRequestBody.createVehicles): GenerateResponse<String> {
+    fun createVehicle(@RequestBody vehicle: VehiclesRequestBody.CreateVehicles): GenerateResponse<String> {
 
         try {
 

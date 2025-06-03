@@ -1,4 +1,4 @@
-package com.trip_service.trip_service.helpers.DTO
+package com.trip_service.trip_service.helpers.dto
 
 import lombok.Getter
 import lombok.Setter

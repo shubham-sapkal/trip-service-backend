@@ -1,4 +1,4 @@
-package com.trip_service.trip_service.core.users.DTO
+package com.trip_service.trip_service.core.users.dto
 
 class RequestBodyDTO {
 

@@ -3,7 +3,7 @@ package com.trip_service.trip_service.core.trips.controllers
 import com.trip_service.trip_service.core.trips.dto.TripReqBody
 import com.trip_service.trip_service.core.trips.models.TripDetails
 import com.trip_service.trip_service.core.trips.services.TripServices
-import com.trip_service.trip_service.helpers.DTO.GenerateResponse
+import com.trip_service.trip_service.helpers.dto.GenerateResponse
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

@@ -2,9 +2,9 @@ package com.trip_service.trip_service.core.users.controllers
 
 
 import com.trip_service.trip_service.core.users.models.Users
-import com.trip_service.trip_service.core.users.DTO.RequestBodyDTO
+import com.trip_service.trip_service.core.users.dto.RequestBodyDTO
 import com.trip_service.trip_service.core.users.services.UserService
-import com.trip_service.trip_service.helpers.DTO.GenerateResponse
+import com.trip_service.trip_service.helpers.dto.GenerateResponse
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.access.prepost.PreAuthorize
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.Optional
 
 @RestController
 @RequestMapping("/users")
