@@ -3,6 +3,7 @@ package com.trip_service.trip_service.core.users.controllers
 
 import com.trip_service.trip_service.core.users.models.Users
 import com.trip_service.trip_service.core.users.dto.RequestBodyDTO
+import com.trip_service.trip_service.core.users.dto.UsersResponseBody
 import com.trip_service.trip_service.core.users.services.UserService
 import com.trip_service.trip_service.helpers.dto.GenerateResponse
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
@@ -68,14 +69,14 @@ class UserController {
 
     @GetMapping("/user-info/{username}")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    fun getUserInfo(@PathVariable username: String): GenerateResponse<Users> {
+    fun getUserInfo(@PathVariable username: String): GenerateResponse<UsersResponseBody.UserInfo> {
 
         try {
 
             val foundUser: Users = userService.getUserById(username);
 
             return GenerateResponse(
-                200, "User Details Found!", "", foundUser
+                200, "User Details Found!", "", foundUser.getFilteredData()
             )
 
         }
@@ -90,10 +91,10 @@ class UserController {
     }
 
     @GetMapping("/all")
-    fun getAllUser(): GenerateResponse<List<Users>> {
+    fun getAllUser(): GenerateResponse<List<UsersResponseBody.UserInfo>> {
         return GenerateResponse(
             200,
-            "Data Retrived Sucessfully!",
+            "Data Retrived Successfully!",
             "",
             userService.getAllUsers()
         )
@@ -116,7 +117,5 @@ class UserController {
             )
         }
     }
-
-
 
 }

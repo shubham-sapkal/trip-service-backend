@@ -1,5 +1,6 @@
 package com.trip_service.trip_service.core.users.services
 
+import com.trip_service.trip_service.core.users.dto.UsersResponseBody
 import com.trip_service.trip_service.core.users.models.Users
 import com.trip_service.trip_service.core.users.repositories.UserRepository
 import com.trip_service.trip_service.helpers.errors.GenerateApiException
@@ -69,8 +70,8 @@ class UserService {
 
     // Get All Users
     @PreAuthorize("hasAnyAuthority('SUPER_ADMIN')")
-    fun getAllUsers(): List<Users> {
-        return userRepository.findAll();
+    fun getAllUsers(): List<UsersResponseBody.UserInfo> {
+        return userRepository.findAll().map { it.getFilteredData() };
     }
 
     // Manipulate User Roles
