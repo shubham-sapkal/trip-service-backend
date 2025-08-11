@@ -1,1 +1,1 @@
-# User Module API Documentations
+# Trips Module API Documentations

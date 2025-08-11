@@ -25,6 +25,9 @@ USERS API - [[ LINK TO USERS API DOCS ]](https://github.com/shubham-sapkal/trip-
 
 Vehicles API - [[ LINK TO VEHICLES API DOCS ]](https://github.com/shubham-sapkal/trip-service-backend/tree/master/src/main/kotlin/com/trip_service/trip_service/core/vehicles)
 
+Routes API = [[ LINK TO ROUTES API DOCS ]](https://github.com/shubham-sapkal/trip-service-backend/blob/master/src/main/kotlin/com/trip_service/trip_service/core/routes)
+
+Trips API = [[ LINK TO TRIPS API DOCS ]](https://github.com/shubham-sapkal/trip-service-backend/tree/master/src/main/kotlin/com/trip_service/trip_service/core/trips)
 
 
 ## Environment Variables
