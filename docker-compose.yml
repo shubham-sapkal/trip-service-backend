@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    image: shubhamsapkal1/fleet-mgmt-trip-service:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env.Production
+    environment:
+      DB_URL: ${DB_URL}
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
